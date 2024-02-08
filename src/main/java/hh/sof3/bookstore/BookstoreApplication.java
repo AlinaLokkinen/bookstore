@@ -16,13 +16,13 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner bookDemo(BookRepository repository) {
+	public CommandLineRunner bookDemo(BookRepository bookRepository) {
 		return (args) -> {
 			Book book1 = new Book("ekakirja", "eka kirjailija", 2000, "930505", 15.0);
 			Book book2 = new Book("tokakirja", "toka kirjailija", 2021, "929065", 15.2);
 
-			repository.save(book1);
-			repository.save(book2);
+			bookRepository.save(book1);
+			bookRepository.save(book2);
 
 		};
 	}
