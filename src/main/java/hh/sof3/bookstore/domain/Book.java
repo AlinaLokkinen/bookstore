@@ -1,12 +1,31 @@
 package hh.sof3.bookstore.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Book {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    
     private String title;
     private String author;
     private int publicationYear;
     public String isbn;
     public double price;
+
+    public Book() {
+        this.author = null;
+        this.id = null;
+        this.title = null;
+        this.publicationYear = 0;
+        this.isbn = null;
+        this.price = 0;
+    }
     
     public Book(String title, String author, int publicationYear, String isbn, double price) {
         this.title = title;
