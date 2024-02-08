@@ -34,6 +34,7 @@ public class Book {
         this.isbn = isbn;
         this.price = price;
     }
+    
 
     public String getTitle() {
         return title;
@@ -79,6 +80,14 @@ public class Book {
     public String toString() {
         return "Book [title=" + title + ", author=" + author + ", publicationYear=" + publicationYear + ", isbn=" + isbn
                 + ", price=" + price + "]";
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     
