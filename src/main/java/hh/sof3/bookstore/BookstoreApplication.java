@@ -7,11 +7,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-
 import hh.sof3.bookstore.domain.Book;
 import hh.sof3.bookstore.domain.BookRepository;
 import hh.sof3.bookstore.domain.Category;
 import hh.sof3.bookstore.domain.CategoryRepository;
+import hh.sof3.bookstore.domain.User;
+import hh.sof3.bookstore.domain.UserRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -22,7 +23,7 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner bookDemo(BookRepository bookRepository, CategoryRepository categoryRepository) {
+	public CommandLineRunner bookDemo(BookRepository bookRepository, CategoryRepository categoryRepository, UserRepository userRepository) {
 		return (args) -> {
 			
 			log.info("creating categories");
@@ -35,7 +36,7 @@ public class BookstoreApplication {
 			categoryRepository.save(cat2);
 			categoryRepository.save(cat3);
 
-			log.info("create a few books");
+			log.info("create books");
 			Book book1 = new Book("eka", "eka", 2032, "993941", 14.5, cat1);
 			Book book2 = new Book("toka", "toka", 2940, "939502", 64.2, cat2);
 			Book book3 = new Book("kolmas", "kolmas", 2944, "959652", 43.5, cat3);
@@ -48,6 +49,13 @@ public class BookstoreApplication {
 			for (Book book : bookRepository.findAll()) {
 				log.info(book.toString());
 			}
+
+			// create users (firstpassword, secondpassword)
+			User user1 = new User("user", "$2a$10$j2mMSIWjPUu5KCLJCfQHguYeTP7UKYZs9q0.tCWAaFjhF.1FMJ4N2", "USER");
+			User user2 = new User("someOtherUser", "$2a$10$IAWOpU5NlhEOE2y/t7o/puYhm2vBpwh3QoIz8G1959F6vvz7ywTHu", "ADMIN");
+
+			userRepository.save(user1);
+			userRepository.save(user2);
 
 		};
 

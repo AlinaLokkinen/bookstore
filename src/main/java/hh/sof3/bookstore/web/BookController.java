@@ -64,7 +64,7 @@ public class BookController {
 
     // only admins are allowed to delete books
     @RequestMapping(value = "/deletebook/{id}", method = RequestMethod.GET)
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteBook(@PathVariable("id") Long bookId) {
         bookRepository.deleteById(bookId);
         return "redirect:/booklist"; 
