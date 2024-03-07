@@ -3,6 +3,7 @@ package hh.sof3.bookstore.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -55,19 +56,25 @@ public class BookController {
         return "redirect:/booklist";
     }
 
+    @RequestMapping(value = "/editbook/{id}", method = RequestMethod.GET)
+    public String editBook(@PathVariable("id") Long bookId, Model model) {
+        model.addAttribute("book", bookRepository.findById(bookId));
+        return "editbook"; // .html
+    }
+
+    // only admins are allowed to delete books
     @RequestMapping(value = "/deletebook/{id}", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ADMIN')")
     public String deleteBook(@PathVariable("id") Long bookId) {
         bookRepository.deleteById(bookId);
-
         return "redirect:/booklist"; 
     }
 
-    @RequestMapping(value = "/editbook/{id}", method = RequestMethod.GET)
-    public String editBook(@PathVariable("id") Long bookId, Model model) {
+    // created a login page and method but there was already a ready made login page?
 
-        model.addAttribute("book", bookRepository.findById(bookId));
-
-        return "editbook"; // .html
-    }
+    // @RequestMapping(value = "/login", method = RequestMethod.GET) 
+    // public String loginPage() {
+    //     return "login"; // .html
+    // }
 
 }
