@@ -50,7 +50,7 @@ public class BookController {
     }
 
     @RequestMapping(value = "/savebook", method = RequestMethod.POST) 
-    public String saveCar(@ModelAttribute Book book) {
+    public String saveBook(@ModelAttribute Book book) {
 
         bookRepository.save(book);
         return "redirect:/booklist";
