@@ -18,12 +18,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 // import org.springframework.security.crypto.password.PasswordEncoder;
 // import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-
 import hh.sof3.bookstore.web.UserDetailServiceImpl;
-
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
+
+
 
 @Configuration
 @EnableWebSecurity
@@ -36,8 +36,16 @@ public class WebSecurityConfig {
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests( authorize -> authorize
-            .requestMatchers(antMatcher("/css/**")).permitAll()
-            .anyRequest().authenticated()
+                .requestMatchers(antMatcher("/css/**")).permitAll()
+                .requestMatchers(toH2Console()).permitAll()
+                .anyRequest().authenticated()
+        )
+        .csrf(csrf -> csrf
+          .ignoringRequestMatchers(toH2Console())
+        )
+        .headers(headers -> headers
+            .frameOptions(frameoptions -> frameoptions
+                    .disable())
         )
         .formLogin(formlogin -> formlogin
             .defaultSuccessUrl("/booklist", true)
