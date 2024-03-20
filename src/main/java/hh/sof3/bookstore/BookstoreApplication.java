@@ -39,7 +39,7 @@ public class BookstoreApplication {
 			log.info("create books");
 			Book book1 = new Book("eka", "eka", 2032, "993941", 14.5, cat1);
 			Book book2 = new Book("toka", "toka", 2940, "939502", 64.2, cat2);
-			Book book3 = new Book("kolmas", "kolmas", 2944, "959652", 43.5, cat3);
+			Book book3 = new Book("kolmas", "kolmas", 2944, "959652", 43.5, null);
 
 			log.info("save books to repository");
 			bookRepository.save(book1);
