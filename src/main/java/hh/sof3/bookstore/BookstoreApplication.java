@@ -40,12 +40,14 @@ public class BookstoreApplication {
 			Book book1 = new Book("eka", "eka", 2032, "993941", 14.5, cat1);
 			Book book2 = new Book("toka", "toka", 2940, "939502", 64.2, cat2);
 			Book book3 = new Book("kolmas", "kolmas", 2944, "959652", 43.5, null);
+			Book book4 = new Book("neljäs", "neljäs", 3421, "923858", 34.23, cat1);
 
 			log.info("save books to repository");
 			bookRepository.save(book1);
 			bookRepository.save(book2);
 			bookRepository.save(book3);
-
+			bookRepository.save(book4);
+			
 			for (Book book : bookRepository.findAll()) {
 				log.info(book.toString());
 			}
