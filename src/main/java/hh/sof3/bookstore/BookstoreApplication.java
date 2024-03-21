@@ -36,6 +36,10 @@ public class BookstoreApplication {
 			categoryRepository.save(cat2);
 			categoryRepository.save(cat3);
 
+			for (Category cat : categoryRepository.findAll()) {
+				log.info(cat.toString());
+			}
+
 			log.info("create books");
 			Book book1 = new Book("eka", "eka", 2032, "993941", 14.5, cat1);
 			Book book2 = new Book("toka", "toka", 2940, "939502", 64.2, cat2);
@@ -47,7 +51,7 @@ public class BookstoreApplication {
 			bookRepository.save(book2);
 			bookRepository.save(book3);
 			bookRepository.save(book4);
-			
+
 			for (Book book : bookRepository.findAll()) {
 				log.info(book.toString());
 			}
@@ -59,6 +63,9 @@ public class BookstoreApplication {
 			userRepository.save(user1);
 			userRepository.save(user2);
 
+			for (User user : userRepository.findAll()) {
+				log.info(user.toString());
+			}
 		};
 
 	
